@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto py-8">
+        <!-- Home Button -->
+        <a href="/" class="absolute top-0 left-0 mt-4 ml-4 text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+            </svg>
+            Home
+        </a>
+        <!-- End Home Button -->
+
+        <h1 class="text-4xl font-bold mb-8 text-center">User Profile</h1>
+        <div class="table-container mb-4">
+            <table class="table table-bordered table-dark table-hover table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3">Name</th>
+                        <th class="px-6 py-3">Phone Number</th>
+                        <th class="px-6 py-3">Email</th>
+                        <th class="px-6 py-3">Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="px-6 py-4">{{ user_info[0] }}</td>
+                        <td class="px-6 py-4">{{ user_info[1] }}</td>
+                        <td class="px-6 py-4">{{ user_info[2] }}</td>
+                        <td class="px-6 py-4">{{ user_info[3] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-center">
+            <form action="/delete-profile" method="post" onsubmit="return confirm('Are you sure you want to delete your profile?');">
+                <button type="submit" class="btn btn-danger px-6 py-3 rounded-md shadow-md hover:bg-red-700 transition-colors">Delete Profile</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

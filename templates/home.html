@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Your existing CSS styles */
+        .btn-primary-outline {
+            @apply bg-white text-gray-900 hover:bg-gray-200;
+        }
+    
+        .custom-button {
+            /* Your existing custom button styles */
+            background-color: #1899D6;
+            border: solid transparent;
+            border-radius: 16px;
+            border-width: 0 0 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: .8px;
+            line-height: 20px;
+            margin: 0;
+            outline: none;
+            overflow: visible;
+            padding: 13px 19px;
+            text-align: center;
+            text-transform: uppercase;
+            touch-action: manipulation;
+            transform: translateZ(0);
+            transition: filter .2s;
+            user-select: none;
+            -webkit-user-select: none;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+    
+        .custom-button:hover {
+            filter: brightness(1.1); /* Adjust brightness on hover */
+        }
+    
+        .custom-button:disabled {
+            cursor: auto;
+        }
+    
+        .custom-button:active:after {
+            border-width: 0 0 0px;
+        }
+    
+        .custom-button:active {
+            padding-bottom: 10px;
+        }
+    </style>
+    <style>
+        body {
+            background-image: src(''); /* Relative path to the image */
+            background-size: cover; /* Cover the entire background */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            background-position: center; /* Center the background image */
+            color: white; /* Set text color to white for better contrast */
+        }
+
+        h1, p {
+            text-align: center; /* Center align the heading and paragraph */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+    
+    
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-gray-800">
+    <a class="navbar-brand" href="#">Movie Ticket Service</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <span class="navbar-text mr-3">
+                    {% if username %}
+                        Welcome, {{ username }} 
+                        {% if location %}
+                            ({{ location }}) 
+                        {% endif %}
+                    {% endif %}
+                </span>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/movies">Movie</a>
+            </li>
+          
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/fanclub">Fan Club</a>
+            </li>
+
+
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about_us">About Us</a>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link custom-button ml-2 px-4 py-2 rounded-full border-2 border-white hover:bg-white hover:text-gray-900" onclick="location.href='/login'">Login</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link custom-button ml-2 px-4 py-2 rounded-full border-2 border-white bg-gray-700 text-gray-200 hover:bg-gray-600" onclick="location.href='/register'">Register</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link custom-button ml-2 px-4 py-2 rounded-full border-2 border-white bg-indigo-700 text-gray-200 hover:bg-indigo-600" onclick="location.href='/user-profile'">User Profile</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<div class="container mt-5">
+    <h1 class="text-4xl font-bold">Welcome to Movie Ticket Service</h1>
+    <p class="mt-3"><i>Buy movie tickets online and enjoy the show!</i></p>
+    {% if username %}
+    <p class="mt-3">Welcome, {{ username }} {% if location %}({{ location }}){% endif %}</p>
+    {% endif %}
+    
+</div>
+
+<!-- Bootstrap JS (jQuery and Popper.js required) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom CSS for movie card and ticket booking */
+        .movie-card {
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .calendar {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .calendar button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .calendar button:hover {
+            background-color: #ddd;
+        }
+
+        .calendar button:focus {
+            outline: none;
+        }
+
+        .showtime-buttons {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .showtime-buttons button {
+            background-color: #1a202c;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .showtime-buttons button:hover {
+            background-color: #2d3748;
+        }
+
+        .seat-plan {
+            margin-top: 20px;
+            padding: 10px;
+            border: 5px solid #ccc;
+            max-height: 300px; /* Adjusted max-height */
+            overflow-y: auto;
+            margin-left: 500px;
+            margin-right: 500px;
+        }
+
+        .seat-plan table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .seat-plan td {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .seat-plan .seat {
+            background-color: #1a202c;
+            width: 30px;
+            height: 30px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .seat-plan .seat.selected {
+            background-color: #ffcc00;
+        }
+
+        .payment-button button {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-200">
+    <div class="container mx-auto mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">Movie Ticket Booking</h5>
+            </div>
+            <div class="card-body">
+                <form id="ticketForm" action="/booking_ticket" method="POST"> <!-- Change the action to the booking_ticket route -->
+                    <!-- Hidden input fields for User_ID, Movie_Name, Movie_ID, and Movie_Time -->
+                    <input type="hidden" name="user_id" value="{{ user_id }}">
+                    <input type="hidden" name="movie_name" value="{{ movie_name }}">
+                    <input type="hidden" name="seat_number" id="selectedSeat" value="">
+                    <input type="hidden" name="movie_time" id="selectedTime" value="">
+
+                    <!-- Date Selection -->
+                   <!-- Date Selection -->
+                    <div class="form-group">
+                        <label for="bookingDate" class="block text-gray-700">Select Date:</label>
+                        <input id="bookingDate" type="date" name="date" class="form-control" required>
+                    </div>
+
+
+                    <!-- Showtime Selection (Initially Hidden) -->
+                    <div id="showtime-selection" style="display: none;">
+                        <div class="form-group">
+                         
+                            <label for="showtime" class="block text-gray-700">Select Showtime:</label>
+                            <select id="showtime" class="form-control" name="show_time" onchange="showSeatSelection(this.value)">
+                                <option value="">Select Showtime</option>
+                                <option value="8:00 am">8:00 am</option>
+                                <option value="4:30 pm">4:30 pm</option>
+                                <option value="7:00 pm">7:00 pm</option>
+                                <!-- Add more showtime options if needed -->
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!-- Seat Selection (Initially Hidden) -->
+                    <div id="seat-selection" style="display: none;">
+                        <div class="form-group">
+                            <label for="seat" class="block text-gray-700">Select Seat:</label>
+                            <div class="seat-plan" style="max-height: 300px;">
+                                <table class="table">
+                                    <tbody>
+                                        <!-- Rows for seats -->
+                                        <tr>
+                                            <!-- Row A -->
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A1')">A1</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A2')">A2</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A3')">A3</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A4')">A4</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A5')">A5</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A6')">A6</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A7')">A7</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A8')">A8</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A9')">A9</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('A10')">A10</button></td>
+                                        </tr>
+                                        <tr>
+                                            <!-- Row B -->
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B1')">B1</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B2')">B2</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B3')">B3</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B4')">B4</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B5')">B5</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B6')">B6</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B7')">B7</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B8')">B8</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B9')">B9</button></td>
+                                            <td><button type="button" onclick="selectSeatAndRedirect('B10')">B10</button></td>
+                                        </tr>
+                                        <!-- Add more rows for other seat sections if needed -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Button -->
+                    <div class="form-group">
+                        <button id="paymentButton" type="button" class="btn btn-primary" onclick="makePayment()">Make Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showSeatSelection(showtime) {
+            document.getElementById('seat-selection').style.display = 'block';
+            document.getElementById('selectedTime').value = showtime; // Set the value of the hidden input field
+        }
+
+        function selectSeatAndRedirect(seat) {
+            selectSeat(seat); // Call selectSeat function to handle seat selection
+            makePayment(); // Call makePayment function to process the payment
+        }
+
+        function selectSeat(seat) {
+            console.log("Selected seat:", seat);
+            document.getElementById('selectedSeat').value = seat; // Set the value of the hidden input field
+            var selectedSeatButton = document.querySelector('.seat.selected');
+            if (selectedSeatButton) {
+                selectedSeatButton.classList.remove('selected');
+            }
+            document.querySelector(`.seat[data-seat="${seat}"]`).classList.add('selected');
+            document.getElementById('paymentButton').style.backgroundColor = '#1a202c';
+            document.getElementById('paymentButton').disabled = false;
+        }
+
+        function makePayment() {
+            console.log("Make Payment button clicked!");
+            // Submit the form to the booking_ticket route
+            document.getElementById('ticketForm').submit();
+        }
+
+        document.getElementById('bookingDate').onchange = function () {
+            document.getElementById('showtime-selection').style.display = 'block';
+        };
+    </script>
+</body>
+
+</html>

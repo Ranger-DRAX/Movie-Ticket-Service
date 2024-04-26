@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Payment</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Movie Ticket Payment</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/payment" method="POST">
+                            <!-- Hidden input fields for User_ID and Payment_ID -->
+                            <input type="hidden" name="user_id" value="{{ user_id }}">
+                            <input type="hidden" name="payment_id" value="{{ payment_id }}">
+
+                            <div class="form-group">
+                                <label for="paymentType">Payment Type:</label>
+                                <select name="payment_type" id="paymentType" class="form-control" required>
+                                    <option value="">Select Payment Type</option>
+                                    <option value="Credit Card">Credit Card</option>
+                                    <option value="Mobile Banking">Mobile Banking</option>
+                                    <!-- Add more payment types if needed -->
+                                </select>
+                            </div>
+
+                            <div id="creditCardNumber" class="form-group" style="display: none;">
+                                <label for="cardNo">Credit Card Number:</label>
+                                <input type="text" name="card_no" id="cardNo" class="form-control">
+                            </div>
+
+                            <div id="mobileNumber" class="form-group" style="display: none;">
+                                <label for="mobileNo">Mobile Number:</label>
+                                <input type="text" name="mobile_no" id="mobileNo" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="paymentDate">Payment Date:</label>
+                                <input type="date" name="payment_date" id="paymentDate" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Submit Payment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show/hide input fields based on payment type selection
+        document.getElementById('paymentType').addEventListener('change', function () {
+            var paymentType = this.value;
+            var creditCardNumber = document.getElementById('creditCardNumber');
+            var mobileNumber = document.getElementById('mobileNumber');
+
+            if (paymentType === 'Credit Card') {
+                creditCardNumber.style.display = 'block';
+                mobileNumber.style.display = 'none';
+            } else if (paymentType === 'Mobile Banking') {
+                creditCardNumber.style.display = 'none';
+                mobileNumber.style.display = 'block';
+            } else {
+                creditCardNumber.style.display = 'none';
+                mobileNumber.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

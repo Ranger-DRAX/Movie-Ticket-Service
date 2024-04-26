@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+        <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        
+        body {
+            background-color: #DBF9FC; /* Set background color to navy-blue */
+        }
+
+        .movie-card {
+            transition: transform 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+            color: white; /* Set font color to white */
+            padding-top: 80%; /* Set padding top for vertical alignment */
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .trailer-btn, .book-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .trailer-btn {
+            background-color: #1a202c;
+            color: #ffffff;
+        }
+
+        .book-btn {
+            background-color: #3182ce;
+            color: #ffffff;
+            margin-left: 10px;
+        }
+
+        .trailer-btn:hover, .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-info {
+            padding: 1rem; /* Add padding to the movie info area */
+        }
+
+        .rating, .review {
+            color: white; /* Set font color of rating and review to white */
+        }
+
+        .movie-name {
+            font-size: 2rem; /* Set font size of movie name to 2rem */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">Available Movies</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Jinja syntax-->
+            {% for movie in movies %}
+            <div class="bg-white movie-card" style="background-image: url(data:image/png;base64,{{ movie['poster_data'] }});">
+                <div class="movie-info">
+                    <h2 class="text-xl font-bold mb-2 movie-name">{{ movie['Name'] }}</h2>
+                    <p class="text-gray-700 mb-4 rating">Rating: {{ movie['Rating'] }}</p>
+                    <p class="text-gray-700 mb-4 review">{{ movie['movie_review'] }}</p>
+                    <div class="flex justify-center">
+                        <a href="{{ movie['Trailer'] }}" class="trailer-btn" target="_blank">Watch Trailer</a>
+                        <a href="/booking_ticket_1/{{ movie['Name'] }}" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
