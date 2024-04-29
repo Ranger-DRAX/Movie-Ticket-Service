@@ -1,16 +1,16 @@
 import MySQLdb
 
 
-connection = MySQLdb.connect(host="localhost",
-                             user="root",
-                             passwd="",
-                             db='movie_ticket' )#---server---name-----
+connection = MySQLdb.connect(host="hosting_server",
+                             user="user",
+                             passwd="password",
+                             db='server_name' )
 
 
 cursor = connection.cursor()
 
 
-cursor.execute("SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = 'movie_ticket' ")
+cursor.execute("SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = 'server_name' ")
 
 
 result = cursor.fetchone()[0]
