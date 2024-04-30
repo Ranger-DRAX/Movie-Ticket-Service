@@ -4,11 +4,10 @@ import mysql.connector
 from flask_mysqldb import MySQL
 import base64
 
-
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_USER'] = 'user_name'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'project_uni'
 app.secret_key = 'your_secret_key_here'
