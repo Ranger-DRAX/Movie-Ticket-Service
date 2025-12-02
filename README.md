@@ -231,7 +231,4 @@ Schema overview (high-level)
 - Maintainer: Ranger-DRAX
 - For support or questions, open an issue on the repository.
 
----
 
-Tell me which you'd prefer and I'll proceed.
-```
