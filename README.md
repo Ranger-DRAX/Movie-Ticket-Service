@@ -2,8 +2,6 @@
 
 A backend service and supporting components for browsing movies, creating showtimes, selecting seats, and purchasing tickets. This repository implements the core APIs and business logic for a Movie Ticket Service used by web and mobile clients.
 
-> NOTE: This README is a thorough template. Replace placeholder values and adjust examples to match the project's actual tech stack, commands, and environment variables.
-
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Features](#features)
@@ -226,62 +224,7 @@ Schema overview (high-level)
 - tickets (id, booking_id, seat_id, qr_code, status)
 - payments (id, booking_id, provider, provider_id, amount, status)
 
-## Running Tests
-- Unit tests:
-  npm test
-- Integration tests (example):
-  npm run test:integration
 
-Tip: Use a test database and reset state between runs. Use Docker compose to spin up ephemeral DBs for CI.
-
-## Docker
-Example Dockerfile & Docker Compose flow:
-- Build the image:
-  docker build -t movie-ticket-service:latest .
-
-- Using docker-compose (example):
-  docker-compose up --build
-
-A sample docker-compose.yml should include services:
-- app (this service)
-- db (postgres)
-- redis (optional)
-
-## Deployment
-- Use environment variables for secrets and DB connection strings.
-- Use a managed Postgres DB in production.
-- Use CI to run tests and build artifacts.
-- Consider blue/green or rolling deployments for minimal downtime.
-- Add monitoring and alerting (Prometheus, Grafana, Sentry).
-
-## Contributing
-Contributions are welcome. Please follow these steps:
-1. Fork the repo
-2. Create a feature branch: git checkout -b feature/your-feature
-3. Commit changes: git commit -m "Add feature"
-4. Push: git push origin feature/your-feature
-5. Open a pull request describing your changes.
-
-Guidelines:
-- Add unit tests for new logic.
-- Keep functions small and well-documented.
-- Follow existing code style & linting rules.
-
-## Troubleshooting
-- Cannot connect to DB:
-  - Verify DATABASE_URL, ensure DB is running and accessible from the app container/host.
-
-- Seat double-booked:
-  - Ensure seat locking flow uses atomic operations (Redis SETNX or DB row-level locks) and honor lock expiration.
-
-- Payments failing in sandbox:
-  - Verify API keys and correct webhook signature verification.
-
-## Security Considerations
-- Never store raw payment details on your servers.
-- Use HTTPS in production.
-- Encrypt secrets and rotate JWT secrets and API keys.
-- Sanitize all user inputs and use parameterized queries to avoid SQL injection.
 
 ## License & Contact
 - License: MIT (or update to your chosen license)
@@ -290,8 +233,5 @@ Guidelines:
 
 ---
 
-If you'd like, I can:
-- Tailor this README to the repository's exact code (I can read the project files and inline routes, commands, and exact stack).
-- Open a pull request adding this README directly to the repo.
 Tell me which you'd prefer and I'll proceed.
 ```
